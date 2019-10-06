@@ -4,20 +4,12 @@ import ReactDOM from 'react-dom';
 import './reset.css';
 import './index.css';
 
-import Header from './component/header';
-import SideBar from './component/sidebar';
-import Main from './component/main';
-import Footer from './component/footer';
+import HomePage from './component/screens/HomePage';
 
 class Container extends React.Component {
     render() {
         return (
-            <div className="container">
-                <Header />
-                <SideBar />
-                <Main />
-                <Footer />
-            </div>
+            <HomePage />
         );
     }
 }
