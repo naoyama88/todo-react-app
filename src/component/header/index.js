@@ -1,12 +1,17 @@
 import React from 'react';
+import './header.css';
 
 class Header extends React.Component {
     render() {
-        const status = "Next player: X";
+        const logoUrl = "/logo192.png"
 
         return (
             <header className="header">
-                <div className="status">{status}</div>
+                <div className="header__container">
+                    <div className="logo">
+                        <img src={logoUrl} alt="logo" />
+                    </div>
+                </div>
             </header>
         );
     }

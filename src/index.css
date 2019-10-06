@@ -1,6 +1,7 @@
 :root {
     --base-background-color: #f5f5f5;
     --base-font-color: #272727;
+    --base-sub-color: #adadad;
 }
 
 body {
@@ -18,39 +19,4 @@ body {
         "sidebar main"
         "sidebar main"
         "footer footer";
-}
-
-.header {
-    /* test */
-    background-color: aqua;
-    /* test */
-    height: 10vh;
-    grid-area: header;
-}
-
-.sidebar {
-    /* test */
-    background-color: chartreuse;
-    /* test */
-    height: 85vh;
-    grid-area: sidebar;
-}
-
-.main {
-    /* test */
-    background-color: crimson;
-    /* test */
-    height: 85vh;
-    grid-area: main;
-}
-
-.footer {
-    /* test */
-    background-color: darkgoldenrod;
-    /* test */
-    height: 5vh;
-    grid-area: footer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

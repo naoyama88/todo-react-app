@@ -1,0 +1,21 @@
+.header {
+    height: 10vh;
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--base-sub-color);
+}
+
+.header .header__container {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.header .header__container .logo {
+    height: 8vh;
+}
+
+.header .header__container .logo img {
+    height: 100%;
+}
