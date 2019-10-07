@@ -1,0 +1,25 @@
+.side-bar-subcategory {
+    padding-left: 25px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+    border-radius: 3px;
+}
+
+.side-bar-subcategory:hover {
+    cursor: pointer;
+    background-color: #c4c4c4;
+}
+
+.side-bar-subcategory:hover::after {
+    content: "•••";
+    position: absolute;
+    right: 5px;
+    top: 3.5px;
+}
+
+.side-bar-subcategory::before {
+    content: "😀";
+    position: absolute;
+    left: 4px;
+}

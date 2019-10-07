@@ -1,0 +1,48 @@
+.side-bar {
+    height: 85vh;
+    grid-area: sidebar;
+    border-bottom: 1px solid var(--base-sub-color);
+    border-right: 1px solid var(--base-sub-color);
+}
+
+.side-bar .side-bar__genre {
+    box-sizing: border-box;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.side-bar .side-bar__genre .genre__title {
+    padding-bottom: 5px;
+}
+
+.side-bar .todo {
+    position: relative;
+}
+
+.side-bar .side-bar-category {
+    list-style: inside;
+    padding-left: 24px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+    border-radius: 2px;
+}
+
+.side-bar .side-bar-category:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+
+.side-bar .side-bar-category:hover::after {
+    content: "•••";
+    position: absolute;
+    right: 5px;
+    top: 3.5px;
+}
+
+.side-bar .side-bar-category > .side-bar-category__title::before {
+    content: "😆";
+    position: absolute;
+    top: 4.5px;
+    left: 2px;
+}

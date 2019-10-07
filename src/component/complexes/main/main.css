@@ -22,7 +22,7 @@
     justify-content: flex-start;
 }
 
-.main .main__container .main__content .todo {
+.main .main__container .main__content .subcategory {
     /* background-color: #ffed8f; */
     border: 1px solid #000000;
     border-radius: 10px;

@@ -1,14 +1,14 @@
-.todoItem {
+.todo {
     cursor: pointer;
     position: relative;
 }
 
-.todoItem > label {
+.todo > label {
     display: flex;
     align-items: center;
 }
 
-.todoItem input {
+.todo input {
     position: absolute;
     opacity: 0;
     height: 0;
@@ -16,14 +16,14 @@
     cursor: pointer;
 }
 
-.todoItem input:checked + span:after {
+.todo input:checked + span:after {
     content: ' \2713\0020';
     color: white;
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(110,200, 250);
+    background-color: rgb(29, 174, 255);
     height: 20px;
     width: 20px;
     box-sizing: border-box;
@@ -32,7 +32,7 @@
     padding: 0px 0px 0px 3px;
 }
 
-.todoItem span.checkbox {
+.todo span.checkbox {
     height: 20px;
     width: 20px;
     box-sizing: border-box;
@@ -40,6 +40,6 @@
     margin-right: 4px;
 }
 
-.todoItem span.input {
+.todo span.input {
     user-select: none;
 }

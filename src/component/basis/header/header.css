@@ -1,13 +1,16 @@
 .header {
     height: 10vh;
     grid-area: header;
+    border-bottom: 1px solid var(--base-sub-color);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--base-sub-color);
 }
 
 .header .header__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-left: 16px;
     margin-right: 16px;
 }
