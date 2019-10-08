@@ -20,7 +20,14 @@ class Subcategory extends React.Component {
         let subcategories = [];
 
         for (let i in this.props.items) {
-            subcategories.push(<Todo item={this.props.items[i].item} handleChangeChk={this.props.handleChangeChk} checked={this.props.items[i].checked} />);
+            subcategories.push(
+                <Todo
+                    item={this.props.items[i].item}
+                    todoId={this.props.items[i].todoId}
+                    handleChangeChk={this.props.handleChangeChk}
+                    checked={this.props.items[i].checked}
+                />
+            );
         }
 
         return (
