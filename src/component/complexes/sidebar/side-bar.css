@@ -40,6 +40,10 @@
     top: 3.5px;
 }
 
+.side-bar .side-bar-category > .side-bar-category__title {
+    height: 20px;
+}
+
 .side-bar .side-bar-category > .side-bar-category__title::before {
     content: "😆";
     position: absolute;

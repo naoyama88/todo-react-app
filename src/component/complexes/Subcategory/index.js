@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './subcategory.css';
 import Todo from '../../basis/Todo';
 
 class Subcategory extends React.Component {
@@ -17,10 +17,10 @@ class Subcategory extends React.Component {
         // this.props.items
         // this.props.handleChangeChk
 
-        let subcategories = [];
+        let subcategory = [];
 
         for (let i in this.props.items) {
-            subcategories.push(
+            subcategory.push(
                 <Todo
                     item={this.props.items[i].item}
                     todoId={this.props.items[i].todoId}
@@ -33,7 +33,8 @@ class Subcategory extends React.Component {
         return (
             <div className="subcategory">
                 <div>{this.state.subcategoryTitle}</div>
-                {subcategories}
+                {subcategory}
+                <div className="dots">⋮</div>
             </div>
         );
     }

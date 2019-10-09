@@ -1,6 +1,7 @@
 import React from 'react';
 import './main.css';
 import Subcategory from '../Subcategory';
+import TransparentSubcategory from '../Subcategory/transparentSubcategory';
 
 class Main extends React.Component {
     render() {
@@ -9,7 +10,7 @@ class Main extends React.Component {
             // {
             //     id: 1,
             //     title: 'Shopping',
-            //     lastSelected: true,
+            //     isCurrentCategory: true,
             //     subcategories: [
             //         {
             //             title: 'IGA',
@@ -22,11 +23,13 @@ class Main extends React.Component {
             //         },
             //     ]
             // }
+        // this.props.newSubcategory
 
-        const subcategories = this.props.category.subcategories.map(subcategory => {
+        let subcategories = this.props.category.subcategories.map(subcategory => {
             const items = subcategory.items;
             return <Subcategory subcategoryTitle={subcategory.title} items={items} handleChangeChk={this.props.handleChangeChk} />;
         });
+        subcategories.push(<TransparentSubcategory newSubcategory={this.props.newSubcategory} />);
 
         return (
             <main className="main">

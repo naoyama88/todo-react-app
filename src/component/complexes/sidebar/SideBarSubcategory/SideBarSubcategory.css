@@ -4,6 +4,7 @@
     padding-bottom: 3px;
     position: relative;
     border-radius: 3px;
+    height: 15px;
 }
 
 .side-bar-subcategory:hover {

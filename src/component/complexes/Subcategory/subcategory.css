@@ -1,0 +1,36 @@
+.subcategory {
+    /* background-color: #ffed8f; */
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+    line-height: 25px;
+    position: relative;
+}
+
+.subcategory .dots {
+    width: 20px;
+    font-size: 26px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.subcategory--transparent {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #777777;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}

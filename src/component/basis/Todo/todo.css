@@ -16,7 +16,7 @@
     cursor: pointer;
 }
 
-.todo input:checked + span:after {
+.todo input:checked + span:before {
     content: ' \2713\0020';
     color: white;
     display: block;

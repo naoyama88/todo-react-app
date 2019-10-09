@@ -4,6 +4,7 @@ import Header from "../basis/header";
 import SideBar from "../complexes/sidebar";
 import Main from "../complexes/main";
 import Footer from "../basis/footer";
+import SampleJsonData from "./sample_data_in_localstorage.js";
 
 const APP_KEY = "marcus_react_todo_app";
 
@@ -11,16 +12,17 @@ class HomePage extends React.Component {
     constructor(props) {
         super(props);
         let data = this.getTodoData();
-        console.log(data);
         this.state = {
             categories: data.categories,
             lastTodoId: data.lastTodoId
         };
         this.handleChangeChk = this.handleChangeChk.bind(this);
+        this.newSubcategory = this.newSubcategory.bind(this);
     }
 
     getTodoData() {
-        return this.getTodoDataFromLocalStrage();
+        // return this.getTodoDataFromSampleJson();
+        return this.getTodoDataFromLocalStroage();
     }
 
     handleChangeChk(e) {
@@ -32,9 +34,7 @@ class HomePage extends React.Component {
                 let items = subcategories[j].items;
                 for (let k = 0; k < items.length; k++) {
                     if (items[k].todoId === todoId) {
-                        categories[i].subcategories[j].items[
-                            k
-                        ].checked = !items[k].checked;
+                        categories[i].subcategories[j].items[k].checked = !items[k].checked;
                     }
                 }
             }
@@ -43,6 +43,42 @@ class HomePage extends React.Component {
             categories: categories
         });
         this.saveData();
+    }
+
+    newSubcategory() {
+        console.log('asdf');
+        // when: run when "add subcategory" box is clicked
+        // state: add new empty subcategory to category
+        this.addNewSubcategoryBox();
+        // interface: show empty box next to existed box
+        // this.addNewTransparentBox();
+        // interface: then add new "add subcategory" box next to the empty box
+        this.saveData();
+    }
+
+    addNewSubcategoryBox() {
+        // get current category and subcategories
+        let categories = this.state.categories;
+        for (let i = 0; i < categories.length; i++) {
+            if (categories[i].isCurrentCategory) {
+                categories[i].subcategories.push({
+                    title: "",
+                    items: [],
+                });
+            }
+        }
+        this.setState({
+            "categories": categories
+        });
+    }
+
+    addNewTransparentBox() {
+        // get current category and subcategories
+        // let currentCategory = this.state("categories").filter(category => {
+        //     return category.isCurrentCategory === true;
+        // })[0];
+        // add "add subcategory" box next to the existed boxes
+
     }
 
     saveData() {
@@ -54,118 +90,14 @@ class HomePage extends React.Component {
         localStorage.setItem(key, setjson);
     }
 
-    getTodoDataFromLocalStrage() {
+    getTodoDataFromLocalStroage() {
         let jsonObj = localStorage.getItem(APP_KEY);
         return JSON.parse(jsonObj);
-        // return {
-        //     lastTodoId: 13,
-        //     categories: [
-        //         {
-        //             id: 1,
-        //             title: "Shopping",
-        //             lastSelected: true,
-        //             subcategories: [
-        //                 {
-        //                     title: "IGA",
-        //                     items: [
-        //                         {
-        //                             todoId: 1,
-        //                             item: "shampoo",
-        //                             checked: false
-        //                         },
-        //                         {
-        //                             todoId: 2,
-        //                             item: "milk",
-        //                             checked: true
-        //                         },
-        //                         {
-        //                             todoId: 3,
-        //                             item: "bread",
-        //                             checked: false
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     title: "Shoppers",
-        //                     items: [
-        //                         {
-        //                             todoId: 4,
-        //                             item: "shampoo",
-        //                             checked: false
-        //                         },
-        //                         {
-        //                             todoId: 5,
-        //                             item: "body soap",
-        //                             checked: true
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     title: "Dollerama",
-        //                     items: [
-        //                         {
-        //                             todoId: 6,
-        //                             item: "plastic box",
-        //                             checked: true
-        //                         },
-        //                         {
-        //                             todoId: 7,
-        //                             item: "pen case",
-        //                             checked: false
-        //                         },
-        //                         {
-        //                             todoId: 8,
-        //                             item: "cushion",
-        //                             checked: false
-        //                         },
-        //                         {
-        //                             todoId: 9,
-        //                             item: "pillow",
-        //                             checked: true
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-        //         },
-        //         {
-        //             id: 2,
-        //             title: "Gym",
-        //             lastSelected: false,
-        //             subcategories: [
-        //                 {
-        //                     title: "Gym",
-        //                     items: [
-        //                         {
-        //                             todoId: 10,
-        //                             item: "chest",
-        //                             checked: true
-        //                         },
-        //                         {
-        //                             todoId: 11,
-        //                             item: "leg",
-        //                             checked: false
-        //                         }
-        //                     ]
-        //                 },
-        //                 {
-        //                     title: "Food",
-        //                     items: [
-        //                         {
-        //                             todoId: 12,
-        //                             item: "vegitable",
-        //                             checked: false
-        //                         },
-        //                         {
-        //                             todoId: 13,
-        //                             item: "100g protain",
-        //                             checked: true
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // };
+    }
+
+    getTodoDataFromSampleJson() {
+        // this is for test
+        return SampleJsonData();
     }
 
     render() {
@@ -176,6 +108,7 @@ class HomePage extends React.Component {
                 <Main
                     category={this.state.categories[0]}
                     handleChangeChk={this.handleChangeChk}
+                    newSubcategory={this.newSubcategory}
                 />
                 <Footer />
             </div>

@@ -21,29 +21,3 @@
     flex-wrap: wrap;
     justify-content: flex-start;
 }
-
-.main .main__container .main__content .subcategory {
-    /* background-color: #ffed8f; */
-    border: 1px solid #000000;
-    border-radius: 10px;
-    box-sizing: border-box;
-    width: 200px;
-    height: 200px;
-    padding: 10px;
-    margin: 10px;
-    line-height: 25px;
-}
-
-.main .main__container .main__content::after {
-    content: "+";
-    box-sizing: border-box;
-    width: 200px;
-    height: 200px;
-    border: 2px dashed #777777;
-    border-radius: 10px;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
