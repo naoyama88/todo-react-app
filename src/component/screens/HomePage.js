@@ -8,6 +8,9 @@ import SampleJsonData from "./sample_data_in_localstorage.js";
 
 const APP_KEY = "marcus_react_todo_app";
 
+// TODO 3点divクリックでメニューだす
+// TODO そのメニュー内に削除機能つける
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
