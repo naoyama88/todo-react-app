@@ -40,6 +40,47 @@
     top: 3.5px;
 }
 
+.side-bar .side-bar-category--transparent {
+    list-style: inside;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 2px;
+    height: 20px;
+    position: relative;
+}
+
+.side-bar .side-bar-category--transparent .add-new-category {
+    width: 18px;
+    height: 18px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-left: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.side-bar .side-bar-category--transparent .add-new-category:before {
+    content: "+";
+    position: absolute;
+    top: 0px;
+    left: 4.2px;
+    color: gray;
+}
+
+.side-bar .side-bar-category--transparent .add-category-input {
+    position: absolute;
+    height: 80%;
+    top: 0;
+    left: 2px;
+}
+
+.side-bar .side-bar-category--transparent .add-category-div > button {
+    height: 25px;
+    background-color: white;
+    border-color: gray;
+    margin: 30px 10px;
+}
+
 .side-bar .side-bar-category > .side-bar-category__title {
     height: 20px;
 }

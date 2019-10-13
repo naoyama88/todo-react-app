@@ -17,10 +17,12 @@ class HomePage extends React.Component {
         let data = this.getTodoData();
         this.state = {
             categories: data.categories,
-            lastTodoId: data.lastTodoId
+            lastTodoId: data.lastTodoId,
+            newCategoryTitle: null
         };
         this.handleChangeChk = this.handleChangeChk.bind(this);
         this.newSubcategory = this.newSubcategory.bind(this);
+        this.addNewCategory = this.addNewCategory.bind(this);
     }
 
     getTodoData() {
@@ -73,6 +75,7 @@ class HomePage extends React.Component {
         this.setState({
             "categories": categories
         });
+        this.saveData();
     }
 
     addNewTransparentBox() {
@@ -103,11 +106,32 @@ class HomePage extends React.Component {
         return SampleJsonData();
     }
 
+    addNewCategory(value) {
+        const inputValue = value;
+        console.log(inputValue);
+        // TODO validation
+        const lastCategoryId = this.state.categories[this.state.categories.length - 1].id;
+        console.log(lastCategoryId);
+        const newCategory = {
+            id: lastCategoryId + 1,
+            title: inputValue + "",
+            isCurrentCategory: false,
+            subcategories: []
+        };
+        let categories = this.state.categories;
+        categories.push(newCategory);
+        this.setState({
+            categories: categories,
+            newCategoryTitle: null
+        });
+        this.saveData();
+    }
+
     render() {
         return (
             <div className="container">
                 <Header />
-                <SideBar categories={this.state.categories} />
+                <SideBar categories={this.state.categories} addNewCategory={this.addNewCategory} newCategoryTitle={this.state.newCategoryTitle} />
                 <Main
                     category={this.state.categories[0]}
                     handleChangeChk={this.handleChangeChk}

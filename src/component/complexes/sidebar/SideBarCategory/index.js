@@ -16,8 +16,6 @@ class SideBarCategory extends React.Component {
                             <SideBarSubcategory subcategory={subcategory} />
                         )
                     })}
-                    {/* <SideBarSubcategory title="Gym" />
-                    <SideBarSubcategory title="Food" /> */}
                 </div>
             </div>
         );
