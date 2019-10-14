@@ -23,6 +23,7 @@ class HomePage extends React.Component {
         this.handleChangeChk = this.handleChangeChk.bind(this);
         this.newSubcategory = this.newSubcategory.bind(this);
         this.addNewCategory = this.addNewCategory.bind(this);
+        this.deleteSubcategory = this.deleteSubcategory.bind(this);
     }
 
     getTodoData() {
@@ -51,22 +52,19 @@ class HomePage extends React.Component {
     }
 
     newSubcategory() {
-        console.log('asdf');
-        // when: run when "add subcategory" box is clicked
-        // state: add new empty subcategory to category
         this.addNewSubcategoryBox();
-        // interface: show empty box next to existed box
-        // this.addNewTransparentBox();
-        // interface: then add new "add subcategory" box next to the empty box
         this.saveData();
     }
 
     addNewSubcategoryBox() {
         // get current category and subcategories
+        const latestCategory = this.state.categories[this.state.categories.length - 1];
+        const lastSuccategoryId = latestCategory.subcategories[latestCategory.subcategories.length - 1].id;
         let categories = this.state.categories;
         for (let i = 0; i < categories.length; i++) {
             if (categories[i].isCurrentCategory) {
                 categories[i].subcategories.push({
+                    id: lastSuccategoryId + 1,
                     title: "",
                     items: [],
                 });
@@ -76,15 +74,6 @@ class HomePage extends React.Component {
             "categories": categories
         });
         this.saveData();
-    }
-
-    addNewTransparentBox() {
-        // get current category and subcategories
-        // let currentCategory = this.state("categories").filter(category => {
-        //     return category.isCurrentCategory === true;
-        // })[0];
-        // add "add subcategory" box next to the existed boxes
-
     }
 
     saveData() {
@@ -104,6 +93,22 @@ class HomePage extends React.Component {
     getTodoDataFromSampleJson() {
         // this is for test
         return SampleJsonData();
+    }
+
+    deleteSubcategory(subcategoryId) {
+        let categories = this.state.categories;
+        for (let i = 0; i < categories.length; i++) {
+            let subcategories = categories[i].subcategories;
+            for (let j = 0; j < subcategories.length; j++) {
+                if (subcategories[j].id === subcategoryId) {
+                    categories[i].subcategories.splice(j, 1);
+                }
+            }
+        }
+        this.setState({
+            categories: categories
+        });
+        this.saveData();
     }
 
     addNewCategory(value) {
@@ -131,7 +136,12 @@ class HomePage extends React.Component {
         return (
             <div className="container">
                 <Header />
-                <SideBar categories={this.state.categories} addNewCategory={this.addNewCategory} newCategoryTitle={this.state.newCategoryTitle} />
+                <SideBar
+                    categories={this.state.categories}
+                    addNewCategory={this.addNewCategory}
+                    newCategoryTitle={this.state.newCategoryTitle}
+                    deleteSubcategory={this.deleteSubcategory}
+                    />
                 <Main
                     category={this.state.categories[0]}
                     handleChangeChk={this.handleChangeChk}

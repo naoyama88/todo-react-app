@@ -33,6 +33,11 @@
     background-color: #e0e0e0;
 }
 
+.side-bar .side-bar-category .side-bar-category__title:hover {
+    cursor: pointer;
+    background-color: #b9b9b9;
+}
+
 .side-bar .side-bar-category:hover::after {
     content: "•••";
     position: absolute;
@@ -81,11 +86,11 @@
     margin: 30px 10px;
 }
 
-.side-bar .side-bar-category > .side-bar-category__title {
+.side-bar .side-bar-category .side-bar-category__title {
     height: 20px;
 }
 
-.side-bar .side-bar-category > .side-bar-category__title::before {
+.side-bar .side-bar-category .side-bar-category__title::before {
     content: "😆";
     position: absolute;
     top: 4.5px;

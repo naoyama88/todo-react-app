@@ -12,8 +12,12 @@
     background-color: #c4c4c4;
 }
 
-.side-bar-subcategory:hover::after {
-    content: "•••";
+.side-bar-subcategory .side-bar-subcategory__menu {
+    display: none;
+}
+
+.side-bar-subcategory:hover .side-bar-subcategory__menu {
+    display: block;
     position: absolute;
     right: 5px;
     top: 3.5px;
@@ -23,4 +27,41 @@
     content: "😀";
     position: absolute;
     left: 4px;
+}
+
+.side-bar-subcategory .overlay {
+    position: absolute;
+    top: -50vh;
+    left: -50vw;
+    width: 200vw;
+    height: 200vh;
+    background-color: white;
+    opacity: 0;
+    z-index: 2;
+    cursor: default;
+}
+
+.side-bar-subcategory .menu {
+    position: absolute;
+    top: 20px;
+    right: 2px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #6a6a6a;
+    z-index: 3;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    line-height: 22px;
+    min-width: 135px;
+    box-sizing: border-box;
+}
+
+.side-bar-subcategory .menu li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.side-bar-subcategory .menu li:hover {
+    background-color: #90d5ff;
+    cursor: pointer;
 }

@@ -8,6 +8,7 @@ export default function() {
                 isCurrentCategory: true,
                 subcategories: [
                     {
+                        id: 1,
                         title: "IGA",
                         items: [
                             {
@@ -28,6 +29,7 @@ export default function() {
                         ]
                     },
                     {
+                        id: 2,
                         title: "Shoppers",
                         items: [
                             {
@@ -43,6 +45,7 @@ export default function() {
                         ]
                     },
                     {
+                        id: 3,
                         title: "Dollerama",
                         items: [
                             {
@@ -75,6 +78,7 @@ export default function() {
                 isCurrentCategory: false,
                 subcategories: [
                     {
+                        id: 4,
                         title: "Gym",
                         items: [
                             {
@@ -90,6 +94,7 @@ export default function() {
                         ]
                     },
                     {
+                        id: 5,
                         title: "Food",
                         items: [
                             {
