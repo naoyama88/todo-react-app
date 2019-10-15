@@ -15,6 +15,12 @@
     margin-bottom: 20px;
 }
 
+.main .main__container input.main__header--edit {
+    font-size: 1.8rem;
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
 .main .main__container .main__content {
     font-size: 1.2rem;
     display: flex;

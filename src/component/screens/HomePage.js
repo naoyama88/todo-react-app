@@ -26,6 +26,7 @@ class HomePage extends React.Component {
         this.deleteCategory = this.deleteCategory.bind(this);
         this.deleteSubcategory = this.deleteSubcategory.bind(this);
         this.showMenu = this.showMenu.bind(this);
+        this.setCategoryTitle = this.setCategoryTitle.bind(this);
     }
 
     showMenu(bool) {
@@ -143,10 +144,8 @@ class HomePage extends React.Component {
 
     addNewCategory(value) {
         const inputValue = value;
-        console.log(inputValue);
         // TODO validation
         const lastCategoryId = this.state.categories[this.state.categories.length - 1].id;
-        console.log(lastCategoryId);
         const newCategory = {
             id: lastCategoryId + 1,
             title: inputValue + "",
@@ -158,6 +157,21 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories,
             newCategoryTitle: null
+        });
+        this.saveData();
+    }
+
+    setCategoryTitle(categoryId, value) {
+
+        let categories = this.state.categories;
+
+        for (let i = 0; i < categories.length; i ++) {
+            if (categories[i].id === categoryId) {
+                categories[i].title = value;
+            }
+        }
+        this.setState({
+            categories: categories
         });
         this.saveData();
     }
@@ -183,6 +197,7 @@ class HomePage extends React.Component {
                     deleteSubcategory={this.deleteSubcategory}
                     showMenu={this.showMenu}
                     menuOn={this.state.menuOn}
+                    setCategoryTitle={this.setCategoryTitle}
                 />
                 <Footer />
             </div>

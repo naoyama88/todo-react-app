@@ -35,9 +35,8 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        console.log('component did mount');
         if (this.state.editCategoryTitle) {
-            console.log('play');
+            console.log('componentDidMount()');
             this.titleInputRef.current.focus();
         }
     }
@@ -74,9 +73,12 @@ class Main extends React.Component {
         this.props.showMenu(false);
     }
 
-    onBlur() {
-        console.log('onBlur()');
+    onBlur(e) {
+        this.props.setCategoryTitle(this.props.category.id, e.target.value);
         this.offMenu();
+        this.setState({
+            editCategoryTitle: false
+        });
     }
 
     render() {
@@ -115,7 +117,7 @@ class Main extends React.Component {
             mainHeader = (() => {
                 return (
                     <div className="main__header">
-                        <Input value={this.props.category.title} ref={this.titleInputRef} onBlur={this.onBlur}/>
+                        <Input className="main__header--edit" defaultValue={this.props.category.title} ref={this.titleInputRef} onBlur={this.onBlur} />
                     </div>
                 );
             })();

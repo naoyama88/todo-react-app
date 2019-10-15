@@ -12,6 +12,7 @@ class Input extends React.Component {
                 minLength={this.props.minLength}
                 value={this.props.value}
                 onBlur={this.props.onBlur}
+                defaultValue={this.props.defaultValue}
                 >
             </input>
         );
