@@ -9,6 +9,7 @@
     margin: 10px;
     line-height: 25px;
     position: relative;
+    overflow: hidden;
 }
 
 .subcategory .dots {

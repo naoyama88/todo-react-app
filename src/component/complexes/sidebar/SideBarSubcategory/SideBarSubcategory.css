@@ -30,18 +30,6 @@
     left: 4px;
 }
 
-.side-bar-subcategory .overlay {
-    position: absolute;
-    top: -50vh;
-    left: -50vw;
-    width: 200vw;
-    height: 200vh;
-    background-color: white;
-    opacity: 0;
-    z-index: 2;
-    cursor: default;
-}
-
 .side-bar-subcategory .menu {
     position: absolute;
     top: 20px;

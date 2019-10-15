@@ -11,6 +11,7 @@ class Input extends React.Component {
                 maxLength={this.props.maxLength}
                 minLength={this.props.minLength}
                 value={this.props.value}
+                onBlur={this.props.onBlur}
                 >
             </input>
         );

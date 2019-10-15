@@ -1,4 +1,5 @@
 import React from 'react';
+import { Overlay } from './../../../basis/Overlay/Overlay.js';
 
 import './SideBarSubcategory.css';
 
@@ -60,7 +61,7 @@ class SideBarSubcategoty extends React.Component {
             modal = (() => {
                 return (
                     <div>
-                        <div className="overlay" onClick={this.clickOverlay} ></div>
+                        <Overlay onClick={this.clickOverlay} />
                         <div className="menu">
                             <ul>
                                 <li>change title</li>
