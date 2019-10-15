@@ -13,14 +13,14 @@
 }
 
 .side-bar-subcategory .side-bar-subcategory__menu {
+    position: absolute;
+    right: 5px;
+    top: 3.5px;
     display: none;
 }
 
 .side-bar-subcategory:hover .side-bar-subcategory__menu {
     display: block;
-    position: absolute;
-    right: 5px;
-    top: 3.5px;
 }
 
 .side-bar-subcategory::before {

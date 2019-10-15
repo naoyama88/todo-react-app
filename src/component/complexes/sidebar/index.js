@@ -5,33 +5,16 @@ import SideBarCategory from './SideBarCategory';
 import TransparentSideBarCategory from './SideBarCategory/TransparentSideBarCategory';
 
 class SideBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            menuOn: false
-        };
-
-        this.showMenu = this.showMenu.bind(this);
-    }
-
-    showMenu(bool) {
-        this.setState({
-            menuOn: bool
-        });
-    }
-
     render() {
-
-        // this.props.categories
-
         return (
             <nav className="side-bar">
                 {this.props.categories.map(category => {
                     return (
                         <SideBarCategory
                             category={category}
-                            showMenu={this.showMenu}
-                            menuOn={this.state.menuOn}
+                            showMenu={this.props.showMenu}
+                            menuOn={this.props.menuOn}
+                            deleteCategory={this.props.deleteCategory}
                             deleteSubcategory={this.props.deleteSubcategory}
                             />
                     )

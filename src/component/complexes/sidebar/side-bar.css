@@ -28,21 +28,16 @@
     border-radius: 2px;
 }
 
+.side-bar .side-bar-category::before {
+    content: "😆";
+    position: absolute;
+    top: 4.5px;
+    left: 2px;
+}
+
 .side-bar .side-bar-category:hover {
     cursor: pointer;
     background-color: #e0e0e0;
-}
-
-.side-bar .side-bar-category .side-bar-category__title:hover {
-    cursor: pointer;
-    background-color: #b9b9b9;
-}
-
-.side-bar .side-bar-category:hover::after {
-    content: "•••";
-    position: absolute;
-    right: 5px;
-    top: 3.5px;
 }
 
 .side-bar .side-bar-category--transparent {
@@ -76,7 +71,8 @@
     position: absolute;
     height: 80%;
     top: 0;
-    left: 2px;
+    left: 10px;
+    width: 85%;
 }
 
 .side-bar .side-bar-category--transparent .add-category-div > button {
@@ -86,13 +82,26 @@
     margin: 30px 10px;
 }
 
+.side-bar .side-bar-category .side-bar-category__wrapper:hover {
+    cursor: pointer;
+    background-color: #c4c4c4;
+}
+
+.side-bar .side-bar-category .side-bar-category__wrapper:hover .side-bar-category__menu {
+    display: block;
+}
+
 .side-bar .side-bar-category .side-bar-category__title {
     height: 20px;
 }
 
-.side-bar .side-bar-category .side-bar-category__title::before {
-    content: "😆";
+.side-bar .side-bar-category .side-bar-category__menu {
     position: absolute;
-    top: 4.5px;
-    left: 2px;
+    right: 5px;
+    top: 5.5px;
+    display: none;
+}
+
+.side-bar .side-bar-category .side-bar-subcategory:hover .side-bar-category__menu {
+    display: block;
 }
