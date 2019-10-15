@@ -1,5 +1,7 @@
 export default function() {
     return {
+        lastCategoryId: 2,
+        lastSubcategoryId: 5,
         lastTodoId: 13,
         categories: [
             {

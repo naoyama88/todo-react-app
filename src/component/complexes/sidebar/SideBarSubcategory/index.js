@@ -75,7 +75,7 @@ class SideBarSubcategoty extends React.Component {
         // this.props.subcategory
 
         return (
-            <div className="side-bar-subcategory">
+            <div className="side-bar-subcategory" data-subcategory-id={this.props.subcategory.id} >
                 <div className="side-bar-subcategory__title">{this.props.subcategory.title}</div>
                 <div className="side-bar-subcategory__menu" onClick={this.clickMenu}>•••</div>
                 {modal}

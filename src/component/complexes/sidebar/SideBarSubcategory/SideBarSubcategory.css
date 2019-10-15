@@ -5,6 +5,8 @@
     position: relative;
     border-radius: 3px;
     height: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .side-bar-subcategory:hover {
@@ -13,10 +15,9 @@
 }
 
 .side-bar-subcategory .side-bar-subcategory__menu {
-    position: absolute;
-    right: 5px;
-    top: 3.5px;
     display: none;
+    margin-left: auto;
+    margin-right: 6px;
 }
 
 .side-bar-subcategory:hover .side-bar-subcategory__menu {

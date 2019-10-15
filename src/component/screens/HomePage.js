@@ -8,9 +8,6 @@ import SampleJsonData from "./sample_data_in_localstorage.js";
 
 const APP_KEY = "marcus_react_todo_app";
 
-// TODO 3点divクリックでメニューだす
-// TODO そのメニュー内に削除機能つける
-
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -18,6 +15,8 @@ class HomePage extends React.Component {
         this.state = {
             categories: data.categories,
             lastTodoId: data.lastTodoId,
+            lastCategoryId: data.lastCategoryId,
+            lastSubcategoryId: data.lastSubcategoryId,
             newCategoryTitle: null,
             menuOn: false
         };
@@ -66,21 +65,21 @@ class HomePage extends React.Component {
     }
 
     addNewSubcategoryBox() {
-        // get current category and subcategories
-        const latestCategory = this.state.categories[this.state.categories.length - 1];
-        const lastSuccategoryId = latestCategory.subcategories[latestCategory.subcategories.length - 1].id;
+        const lastSubcategoryId = this.state.lastSubcategoryId;
+        console.log(lastSubcategoryId);
         let categories = this.state.categories;
         for (let i = 0; i < categories.length; i++) {
             if (categories[i].isCurrentCategory) {
                 categories[i].subcategories.push({
-                    id: lastSuccategoryId + 1,
+                    id: lastSubcategoryId + 1,
                     title: "",
                     items: [],
                 });
             }
         }
         this.setState({
-            "categories": categories
+            categories: categories,
+            lastSubcategoryId: lastSubcategoryId + 1
         });
         this.saveData();
     }
@@ -124,11 +123,15 @@ class HomePage extends React.Component {
 
     deleteSubcategory(subcategoryId) {
         let categories = this.state.categories;
+
+        // label
+        breakWholeLoop:
         for (let i = 0; i < categories.length; i++) {
             let subcategories = categories[i].subcategories;
             for (let j = 0; j < subcategories.length; j++) {
                 if (subcategories[j].id === subcategoryId) {
                     categories[i].subcategories.splice(j, 1);
+                    break breakWholeLoop;
                 }
             }
         }
