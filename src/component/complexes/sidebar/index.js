@@ -8,9 +8,10 @@ class SideBar extends React.Component {
     render() {
         return (
             <nav className="side-bar">
-                {this.props.categories.map(category => {
+                {this.props.categories.map((category, i) => {
                     return (
                         <SideBarCategory
+                            key={i}
                             category={category}
                             showMenu={this.props.showMenu}
                             menuOn={this.props.menuOn}
@@ -19,7 +20,10 @@ class SideBar extends React.Component {
                             />
                     )
                 })}
-                <TransparentSideBarCategory addNewCategory={this.props.addNewCategory} newCategoryTitle={this.props.newCategoryTitle} />
+                <TransparentSideBarCategory
+                    addNewCategory={this.props.addNewCategory}
+                    newCategoryTitle={this.props.newCategoryTitle}
+                    />
             </nav>
         );
     }

@@ -64,7 +64,6 @@ class SideBarSubcategoty extends React.Component {
                         <Overlay onClick={this.clickOverlay} />
                         <div className="menu">
                             <ul>
-                                <li>change title</li>
                                 <li onClick={this.deleteSubcategory}>delete</li>
                             </ul>
                         </div>

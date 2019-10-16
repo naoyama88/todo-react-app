@@ -2,7 +2,6 @@ import React from 'react';
 import './main.css';
 import Subcategory from '../Subcategory';
 import TransparentSubcategory from '../Subcategory/transparentSubcategory';
-import { Input } from '../../basis/Parts/Input';
 import { Overlay } from '../../basis/Overlay/Overlay.js';
 
 class Main extends React.Component {
@@ -10,7 +9,8 @@ class Main extends React.Component {
         super(props);
         this.state = {
             menuOn: false,
-            editCategoryTitle: false
+            editCategoryTitle: false,
+            now: 0
         };
         this.titleInputRef = React.createRef();
 
@@ -21,6 +21,7 @@ class Main extends React.Component {
         this.deleteCategory = this.deleteCategory.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.changeCategoryTitleInEditableHtml = this.changeCategoryTitleInEditableHtml.bind(this);
     }
 
     deleteCategory() {
@@ -30,14 +31,14 @@ class Main extends React.Component {
 
     changeTitle() {
         this.setState({
+            menuOn: false,
             editCategoryTitle: true
         });
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         if (this.state.editCategoryTitle) {
-            console.log('componentDidMount()');
-            this.titleInputRef.current.focus();
+            this.titleInputRef.focus();
         }
     }
 
@@ -81,10 +82,17 @@ class Main extends React.Component {
         });
     }
 
+    changeCategoryTitleInEditableHtml(e) {
+        this.props.setCategoryTitle(this.props.category.id, e.target.innerHTML.trim());
+    }
+
     render() {
-        let subcategories = this.props.category.subcategories.map(subcategory => {
+        let index = 0;
+        let subcategories = this.props.category.subcategories.map((subcategory, i) => {
+            index = i;
             return (
                 <Subcategory
+                    key={i}
                     subcategory={subcategory}
                     handleChangeChk={this.props.handleChangeChk}
                     showMenu={this.props.showMenu}
@@ -93,53 +101,46 @@ class Main extends React.Component {
                     />
             );
         });
-        subcategories.push(<TransparentSubcategory newSubcategory={this.props.newSubcategory} />);
-
-        let modal = null;
-        if (this.props.menuOn === true && this.state.menuOn === true) {
-            modal = (() => {
-                return (
-                    <div className="menu__modal">
-                        <Overlay onClick={this.clickOverlay} />
-                        <div className="menu">
-                            <ul>
-                                <li onClick={this.changeTitle}>change title</li>
-                                <li onClick={this.deleteCategory}>delete</li>
-                            </ul>
-                        </div>
-                    </div>
-                );
-            })();
-        }
-
-        let mainHeader = null;
-        if (this.state.editCategoryTitle) {
-            mainHeader = (() => {
-                return (
-                    <div className="main__header">
-                        <Input className="main__header--edit" defaultValue={this.props.category.title} ref={this.titleInputRef} onBlur={this.onBlur} />
-                    </div>
-                );
-            })();
-        } else {
-            mainHeader = (() => {
-                return (
-                    <div className="main__header">
-                        {this.props.category.title}
-                    </div>
-                );
-            })();
-        }
+        index++;
+        subcategories.push(
+            <TransparentSubcategory
+                key={index}
+                newSubcategory={this.props.newSubcategory}
+                />
+        );
 
         return (
             <main className="main">
                 <div className="main__container">
-                    {mainHeader}
+                    {this.state.editCategoryTitle ? (
+                        <div className="main__header">
+                            <input
+                                className="main__header--edit"
+                                defaultValue={this.props.category.title}
+                                ref={(ref) => this.titleInputRef = ref }
+                                onBlur={this.onBlur}
+                                />
+                        </div>
+                    ) : (
+                        <div contentEditable="true" className="main__header" onInput={this.changeCategoryTitleInEditableHtml}>
+                            {this.props.category.title}
+                        </div>
+                    )}
                     <div className="main__content">
                         {subcategories}
                     </div>
                     <div className="main__menu" onClick={this.clickMenu}>•••</div>
-                    {modal}
+                    {this.props.menuOn === true && this.state.menuOn === true ? (
+                        <div className="menu__modal">
+                            <Overlay onClick={this.clickOverlay} />
+                            <div className="menu">
+                                <ul>
+                                    <li onClick={this.changeTitle}>change title</li>
+                                    <li onClick={this.deleteCategory}>delete</li>
+                                </ul>
+                            </div>
+                        </div>
+                    ) : (null)}
                 </div>
             </main>
         );

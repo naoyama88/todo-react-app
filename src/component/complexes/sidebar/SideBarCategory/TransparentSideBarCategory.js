@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Input } from '../../../basis/Parts/Input.js';
-
 class TransparentSideBarCategory extends React.Component {
     constructor(props) {
         super(props);
@@ -41,7 +39,7 @@ class TransparentSideBarCategory extends React.Component {
             inputCategory = (() => {
                 return (
                     <div className="add-category-div">
-                        <Input id="addCategory" className="add-category-input" value={this.props.newCategoryTitle} />
+                        <input id="addCategory" className="add-category-input" value={this.props.newCategoryTitle} />
                         <button className="add-category-button" onClick={this.addNewCategoryButtonClick}>add</button>
                         <button className="cancel-add-category-button" onClick={this.cancelAddCategory}>cancel</button>
                     </div>

@@ -66,7 +66,6 @@ class SideBarCategory extends React.Component {
                         <Overlay onClick={this.clickOverlay} />
                         <div className="menu">
                             <ul>
-                                <li>change title</li>
                                 <li onClick={this.deleteCategory}>delete</li>
                             </ul>
                         </div>
@@ -85,9 +84,10 @@ class SideBarCategory extends React.Component {
                     {modal}
                 </div>
                 <div>
-                    {this.props.category.subcategories.map(subcategory => {
+                    {this.props.category.subcategories.map((subcategory ,i) => {
                         return (
                             <SideBarSubCategory
+                                key={i}
                                 subcategory={subcategory}
                                 showMenu={this.props.showMenu}
                                 menuOn={this.props.menuOn}

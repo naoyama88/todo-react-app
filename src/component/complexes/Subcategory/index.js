@@ -62,21 +62,24 @@ class Subcategory extends React.Component {
 
     render() {
         let subcategory = [];
-        for (const item of this.props.subcategory.items) {
+        for (const i in this.props.subcategory.items) {
             subcategory.push(
                 <Todo
-                    item={item.item}
-                    todoId={item.todoId}
+                    key={i}
+                    item={this.props.subcategory.items[i].item}
+                    todoId={this.props.subcategory.items[i].todoId}
                     handleChangeChk={this.props.handleChangeChk}
-                    checked={item.checked}
+                    checked={this.props.subcategory.items[i].checked}
                 />
             );
         }
 
-        let modal = null;
-        if (this.props.menuOn === true && this.state.menuOn === true) {
-            modal = (() => {
-                return (
+        return (
+            <div className="subcategory">
+                <div>{this.state.subcategoryTitle}</div>
+                {subcategory}
+                <div className="dots" onClick={this.clickMenu}>⋮</div>
+                {(this.props.menuOn === true && this.state.menuOn === true) ? (
                     <div className="menu__modal">
                         <Overlay onClick={this.clickOverlay} />
                         <div className="menu">
@@ -86,16 +89,7 @@ class Subcategory extends React.Component {
                             </ul>
                         </div>
                     </div>
-                );
-            })();
-        }
-
-        return (
-            <div className="subcategory">
-                <div>{this.state.subcategoryTitle}</div>
-                {subcategory}
-                <div className="dots" onClick={this.clickMenu}>⋮</div>
-                {modal}
+                ) : (null)}
             </div>
         );
     }

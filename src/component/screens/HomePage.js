@@ -43,6 +43,7 @@ class HomePage extends React.Component {
     handleChangeChk(e) {
         const todoId = Number(e.currentTarget.dataset.todoId);
         let categories = this.state.categories;
+        outSideLoop:
         for (let i = 0; i < categories.length; i++) {
             let subcategories = categories[i].subcategories;
             for (let j = 0; j < subcategories.length; j++) {
@@ -50,6 +51,7 @@ class HomePage extends React.Component {
                 for (let k = 0; k < items.length; k++) {
                     if (items[k].todoId === todoId) {
                         categories[i].subcategories[j].items[k].checked = !items[k].checked;
+                        break outSideLoop;
                     }
                 }
             }
