@@ -21,7 +21,6 @@ class Main extends React.Component {
         this.deleteCategory = this.deleteCategory.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.onBlur = this.onBlur.bind(this);
-        this.changeCategoryTitleInEditableHtml = this.changeCategoryTitleInEditableHtml.bind(this);
     }
 
     deleteCategory() {
@@ -82,10 +81,6 @@ class Main extends React.Component {
         });
     }
 
-    changeCategoryTitleInEditableHtml(e) {
-        this.props.setCategoryTitle(this.props.category.id, e.target.innerHTML.trim());
-    }
-
     render() {
         let index = 0;
         let subcategories = this.props.category.subcategories.map((subcategory, i) => {
@@ -122,7 +117,7 @@ class Main extends React.Component {
                                 />
                         </div>
                     ) : (
-                        <div contentEditable="true" className="main__header" onInput={this.changeCategoryTitleInEditableHtml}>
+                        <div className="main__header">
                             {this.props.category.title}
                         </div>
                     )}

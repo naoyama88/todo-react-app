@@ -21,6 +21,10 @@
     margin-bottom: 20px;
 }
 
+.main .main__container input.main__header--edit:focus{
+    outline: none;
+}
+
 .main .main__container .main__content {
     font-size: 1.2rem;
     display: flex;
