@@ -16,9 +16,9 @@
 }
 
 .main .main__container input.main__header--edit {
-    font-size: 1.8rem;
-    padding: 5px 0;
-    margin-bottom: 20px;
+    font-size: 1.85rem;
+    margin-top: -10px;
+    margin-left: -2px;
 }
 
 .main .main__container input.main__header--edit:focus{
