@@ -1,6 +1,6 @@
 import React from 'react';
 import './main.css';
-import Subcategory from '../Subcategory';
+import Subcategory from '../Subcategory/Subcategory';
 import TransparentSubcategory from '../Subcategory/transparentSubcategory';
 import { Overlay } from '../../basis/Overlay/Overlay.js';
 
@@ -82,28 +82,6 @@ class Main extends React.Component {
     }
 
     render() {
-        let index = 0;
-        let subcategories = this.props.category.subcategories.map((subcategory, i) => {
-            index = i;
-            return (
-                <Subcategory
-                    key={i}
-                    subcategory={subcategory}
-                    handleChangeChk={this.props.handleChangeChk}
-                    showMenu={this.props.showMenu}
-                    menuOn={this.props.menuOn}
-                    deleteSubcategory={this.props.deleteSubcategory}
-                    />
-            );
-        });
-        index++;
-        subcategories.push(
-            <TransparentSubcategory
-                key={index}
-                newSubcategory={this.props.newSubcategory}
-                />
-        );
-
         return (
             <main className="main">
                 <div className="main__container">
@@ -122,7 +100,23 @@ class Main extends React.Component {
                         </div>
                     )}
                     <div className="main__content">
-                        {subcategories}
+                        {this.props.category.subcategories.map((subcategory, i) => {
+                            return (
+                                <Subcategory
+                                    key={i}
+                                    subcategory={subcategory}
+                                    handleChangeChk={this.props.handleChangeChk}
+                                    showMenu={this.props.showMenu}
+                                    menuOn={this.props.menuOn}
+                                    deleteSubcategory={this.props.deleteSubcategory}
+                                    setSubcategoryTitle={this.props.setSubcategoryTitle}
+                                    addTodo={this.props.addTodo}
+                                    />
+                            )
+                        })}
+                        <TransparentSubcategory
+                            newSubcategory={this.props.newSubcategory}
+                            />
                     </div>
                     <div className="main__menu" onClick={this.clickMenu}>•••</div>
                     {this.props.menuOn === true && this.state.menuOn === true ? (

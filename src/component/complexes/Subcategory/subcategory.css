@@ -9,12 +9,12 @@
     margin: 10px;
     line-height: 25px;
     position: relative;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .subcategory .dots {
     width: 20px;
-    font-size: 26px;
+    font-size: 25px;
     position: absolute;
     right: 5px;
     top: 8px;
@@ -34,4 +34,34 @@
     justify-content: center;
     cursor: pointer;
     position: relative;
+}
+
+.main .main__container .subcategory .menu__modal {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+}
+
+.main .main__container .subcategory .menu__modal .menu {
+    position: absolute;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #6a6a6a;
+    z-index: 3;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    line-height: 20px;
+    min-width: 135px;
+    box-sizing: border-box;
+}
+
+.subcategory__title--edit {
+    font-size: 1.3rem;
+    width: 90%;
+    margin-top: -10px;
+    margin-left: -2px;
+}
+
+.subcategory__title--edit:focus{
+    outline: none;
 }

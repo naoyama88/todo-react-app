@@ -43,3 +43,38 @@
 .todo span.input {
     user-select: none;
 }
+
+.todo--transparent .add-new-todo {
+    width: 18px;
+    height: 18px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-top: 1px;
+    cursor: pointer;
+    position: relative;
+}
+
+.todo--transparent .add-new-todo:before {
+    content: "+";
+    position: absolute;
+    top: -4.5px;
+    left: 3.2px;
+    color: gray;
+}
+
+.todo--transparent .add-todo-input {
+    height: 18px;
+    width: 85%;
+
+}
+
+.todo--transparent .add-todo-div > button {
+    height: 25px;
+    background-color: white;
+    border-color: gray;
+}
+
+.todo--transparent .add-todo-button,
+.todo--transparent .cancel-add-todo-button {
+    cursor: pointer;
+}

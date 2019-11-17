@@ -2,7 +2,7 @@ import React from "react";
 
 import Header from "../basis/header";
 import SideBar from "../complexes/sidebar";
-import Main from "../complexes/main";
+import Main from "../complexes/main/Main";
 import Footer from "../basis/footer";
 import SampleJsonData from "./sample_data_in_localstorage.js";
 
@@ -27,6 +27,8 @@ class HomePage extends React.Component {
         this.deleteSubcategory = this.deleteSubcategory.bind(this);
         this.showMenu = this.showMenu.bind(this);
         this.setCategoryTitle = this.setCategoryTitle.bind(this);
+        this.setSubcategoryTitle = this.setSubcategoryTitle.bind(this);
+        this.addTodo = this.addTodo.bind(this);
     }
 
     showMenu(bool) {
@@ -69,7 +71,6 @@ class HomePage extends React.Component {
 
     addNewSubcategoryBox() {
         const lastSubcategoryId = this.state.lastSubcategoryId;
-        console.log(lastSubcategoryId);
         let categories = this.state.categories;
         for (let i = 0; i < categories.length; i++) {
             if (categories[i].isCurrentCategory) {
@@ -178,6 +179,54 @@ class HomePage extends React.Component {
         this.saveData();
     }
 
+    setSubcategoryTitle(subcategoryId, value) {
+        let categories = this.state.categories;
+
+        for (let i = 0; i < categories.length; i ++) {
+            let subcategories = categories[i].subcategories;
+            for (let j = 0; j < subcategories.length; j++) {
+                if (subcategories[j].id === subcategoryId) {
+                    categories[i].subcategories[j].title = value;
+                }
+            }
+        }
+        this.setState({
+            categories: categories
+        });
+        this.saveData();
+    }
+
+    addTodo(value, subcategoryId) {
+        console.log(value);
+        console.log(subcategoryId);
+        let categories = this.state.categories;
+        const latestId = this.state.lastTodoId + 1;
+        const newTodo = {
+            todoId: latestId,
+            item: value,
+            checked: false
+        }
+        console.log(latestId);
+        console.log(newTodo);
+        breakWholeLoop:
+        for (let i = 0; i < categories.length; i++) {
+            let subcategories = categories[i].subcategories;
+            for (let j = 0; j < subcategories.length; j++) {
+                if (subcategories[j].id === subcategoryId) {
+                    console.log('yes');
+                    subcategories[j].items.push(newTodo);
+                    break breakWholeLoop;
+                }
+            }
+        }
+        this.setState({
+            categories: categories,
+            lastTodoId: latestId
+        });
+        console.log(this.state.categories);
+        this.saveData();
+    }
+
     render() {
         return (
             <div className="container">
@@ -200,6 +249,8 @@ class HomePage extends React.Component {
                     showMenu={this.showMenu}
                     menuOn={this.state.menuOn}
                     setCategoryTitle={this.setCategoryTitle}
+                    setSubcategoryTitle={this.setSubcategoryTitle}
+                    addTodo={this.addTodo}
                 />
                 <Footer />
             </div>

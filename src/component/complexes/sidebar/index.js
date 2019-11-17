@@ -22,7 +22,6 @@ class SideBar extends React.Component {
                 })}
                 <TransparentSideBarCategory
                     addNewCategory={this.props.addNewCategory}
-                    newCategoryTitle={this.props.newCategoryTitle}
                     />
             </nav>
         );

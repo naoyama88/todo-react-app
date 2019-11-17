@@ -33,29 +33,17 @@ class TransparentSideBarCategory extends React.Component {
     }
 
     render() {
-
-        let inputCategory = null;
-        if (this.state.addNewCategory === true) {
-            inputCategory = (() => {
-                return (
+        return (
+            <div className="side-bar-category--transparent">
+                {(this.state.addNewCategory === true) ? (
                     <div className="add-category-div">
-                        <input id="addCategory" className="add-category-input" value={this.props.newCategoryTitle} />
+                        <input id="addCategory" className="add-category-input" />
                         <button className="add-category-button" onClick={this.addNewCategoryButtonClick}>add</button>
                         <button className="cancel-add-category-button" onClick={this.cancelAddCategory}>cancel</button>
                     </div>
-                );
-            })();
-        } else {
-            inputCategory = (() => {
-                return (
+                ) : (
                     <div className="add-new-category" onClick={this.showInputForNewCategory}></div>
-                );
-            })();
-        }
-
-        return (
-            <div className="side-bar-category--transparent">
-                {inputCategory}
+                )}
             </div>
         );
     }
