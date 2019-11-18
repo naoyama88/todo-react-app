@@ -77,7 +77,7 @@ class SideBarCategory extends React.Component {
         // this.props.category
 
         return (
-            <div className="side-bar-category">
+            <div className="side-bar-category" onClick={() => this.props.hangleOnClickCategory(this.props.category.id)}>
                 <div className="side-bar-category__wrapper">
                     <div className="side-bar-category__title">{this.props.category.title}</div>
                     <div className="side-bar-category__menu" onClick={this.clickMenu}>•••</div>

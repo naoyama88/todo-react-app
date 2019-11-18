@@ -5,6 +5,8 @@ import SideBarCategory from './SideBarCategory';
 import TransparentSideBarCategory from './SideBarCategory/TransparentSideBarCategory';
 
 class SideBar extends React.Component {
+    // todo when click category, movo page to it
+    // onclick
     render() {
         return (
             <nav className="side-bar">
@@ -17,6 +19,7 @@ class SideBar extends React.Component {
                             menuOn={this.props.menuOn}
                             deleteCategory={this.props.deleteCategory}
                             deleteSubcategory={this.props.deleteSubcategory}
+                            hangleOnClickCategory={this.props.hangleOnClickCategory}
                             />
                     )
                 })}

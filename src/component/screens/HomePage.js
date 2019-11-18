@@ -17,6 +17,7 @@ class HomePage extends React.Component {
             lastTodoId: data.lastTodoId,
             lastCategoryId: data.lastCategoryId,
             lastSubcategoryId: data.lastSubcategoryId,
+            activeCategoryId: data.activeCategoryId || data.categories[0].id,
             newCategoryTitle: null,
             menuOn: false
         };
@@ -29,6 +30,8 @@ class HomePage extends React.Component {
         this.setCategoryTitle = this.setCategoryTitle.bind(this);
         this.setSubcategoryTitle = this.setSubcategoryTitle.bind(this);
         this.addTodo = this.addTodo.bind(this);
+        this.hangleOnClickCategory = this.hangleOnClickCategory.bind(this);
+        this.getActiveCategory = this.getActiveCategory.bind(this);
     }
 
     showMenu(bool) {
@@ -197,8 +200,6 @@ class HomePage extends React.Component {
     }
 
     addTodo(value, subcategoryId) {
-        console.log(value);
-        console.log(subcategoryId);
         let categories = this.state.categories;
         const latestId = this.state.lastTodoId + 1;
         const newTodo = {
@@ -206,14 +207,11 @@ class HomePage extends React.Component {
             item: value,
             checked: false
         }
-        console.log(latestId);
-        console.log(newTodo);
         breakWholeLoop:
         for (let i = 0; i < categories.length; i++) {
             let subcategories = categories[i].subcategories;
             for (let j = 0; j < subcategories.length; j++) {
                 if (subcategories[j].id === subcategoryId) {
-                    console.log('yes');
                     subcategories[j].items.push(newTodo);
                     break breakWholeLoop;
                 }
@@ -225,6 +223,33 @@ class HomePage extends React.Component {
         });
         console.log(this.state.categories);
         this.saveData();
+    }
+
+    hangleOnClickCategory(categoryId) {
+        console.log(categoryId);
+        let latestCategoryId;
+        let categories = this.state.categories;
+        for (let i = 0; i < this.state.categories.length; i++) {
+            if (this.state.categories[i].id === categoryId) {
+                latestCategoryId = this.state.categories[i].id;
+                categories[i].isCurrentCategory = true;
+            } else {
+                categories[i].isCurrentCategory = false;
+            }
+        }
+        this.setState({
+            categories: categories,
+            activeCategoryId: latestCategoryId,
+        });
+        this.saveData();
+    }
+
+    getActiveCategory() {
+        for (let i = 0; i < this.state.categories.length; i++) {
+            if (this.state.categories[i].id === this.state.activeCategoryId) {
+                return this.state.categories[i];
+            }
+        }
     }
 
     render() {
@@ -239,9 +264,10 @@ class HomePage extends React.Component {
                     deleteSubcategory={this.deleteSubcategory}
                     showMenu={this.showMenu}
                     menuOn={this.state.menuOn}
+                    hangleOnClickCategory={this.hangleOnClickCategory}
                     />
                 <Main
-                    category={this.state.categories[0]}
+                    category={this.getActiveCategory()}
                     handleChangeChk={this.handleChangeChk}
                     newSubcategory={this.newSubcategory}
                     deleteCategory={this.deleteCategory}

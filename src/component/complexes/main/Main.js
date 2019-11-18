@@ -119,7 +119,7 @@ class Main extends React.Component {
                             />
                     </div>
                     <div className="main__menu" onClick={this.clickMenu}>•••</div>
-                    {this.props.menuOn === true && this.state.menuOn === true ? (
+                    {this.props.menuOn === true && this.state.menuOn === true &&
                         <div className="menu__modal">
                             <Overlay onClick={this.clickOverlay} />
                             <div className="menu">
@@ -129,7 +129,7 @@ class Main extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                    ) : (null)}
+                    }
                 </div>
             </main>
         );
