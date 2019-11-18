@@ -1,6 +1,6 @@
 import React from 'react';
-import { Overlay } from './../../../basis/Overlay/Overlay.js';
-import SideBarSubCategory from '../SideBarSubcategory';
+import { Overlay } from '../../../basis/Overlay/Overlay';
+import SideBarSubCategory from '../SideBarSubcategory/SideBarSubcategory';
 
 import './SideBarCategory.css';
 

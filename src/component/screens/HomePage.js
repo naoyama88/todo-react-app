@@ -1,9 +1,9 @@
 import React from "react";
 
-import Header from "../basis/header";
-import SideBar from "../complexes/sidebar";
+import Header from "../basis/Header/Header";
+import SideBar from "../complexes/Sidebar/Sidebar";
 import Main from "../complexes/main/Main";
-import Footer from "../basis/footer";
+import Footer from "../basis/Footer/Footer";
 import SampleJsonData from "./sample_data_in_localstorage.js";
 
 const APP_KEY = "marcus_react_todo_app";

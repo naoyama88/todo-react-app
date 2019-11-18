@@ -1,8 +1,8 @@
 import React from 'react';
-import { Overlay } from '../../basis/Overlay/Overlay.js';
-import Todo from '../../basis/Todo';
-import { TransparentTodo } from '../../basis/Todo/TransparentTodo.js';
-import './subcategory.css';
+import { Overlay } from '../../basis/Overlay/Overlay';
+import Todo from '../../basis/Todo/Todo';
+import { TransparentTodo } from '../../basis/Todo/TransparentTodo';
+import './subcategory.css';1
 
 class Subcategory extends React.Component {
 

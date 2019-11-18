@@ -1,7 +1,7 @@
 import React from 'react';
 import './side-bar.css';
 
-import SideBarCategory from './SideBarCategory';
+import SideBarCategory from './SideBarCategory/SideBarCategory';
 import TransparentSideBarCategory from './SideBarCategory/TransparentSideBarCategory';
 
 class SideBar extends React.Component {
