@@ -200,6 +200,9 @@ class HomePage extends React.Component {
     }
 
     addTodo(value, subcategoryId) {
+        if (!value.trim()) {
+            return;
+        }
         let categories = this.state.categories;
         const latestId = this.state.lastTodoId + 1;
         const newTodo = {
