@@ -17,10 +17,12 @@ class HomePage extends React.Component {
             lastTodoId: data.lastTodoId,
             lastCategoryId: data.lastCategoryId,
             lastSubcategoryId: data.lastSubcategoryId,
-            activeCategoryId: data.activeCategoryId || data.categories[0].id,
+            activeCategoryIndex: data.activeCategoryIndex,
+            activeCategory: data.categories[data.activeCategoryIndex],
             newCategoryTitle: null,
             menuOn: false
         };
+
         this.handleChangeChk = this.handleChangeChk.bind(this);
         this.newSubcategory = this.newSubcategory.bind(this);
         this.addNewCategory = this.addNewCategory.bind(this);
@@ -31,7 +33,7 @@ class HomePage extends React.Component {
         this.setSubcategoryTitle = this.setSubcategoryTitle.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this.hangleOnClickCategory = this.hangleOnClickCategory.bind(this);
-        this.getActiveCategory = this.getActiveCategory.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
     }
 
     showMenu(bool) {
@@ -43,6 +45,29 @@ class HomePage extends React.Component {
     getTodoData() {
         // return this.getTodoDataFromSampleJson();
         return this.getTodoDataFromLocalStroage();
+    }
+
+    deleteTodo(todoId) {
+        let categories = this.state.categories;
+
+        // label
+        breakWholeLoop:
+        for (let i = 0; i < categories.length; i++) {
+            let subcategories = categories[i].subcategories;
+            for (let j = 0; j < subcategories.length; j++) {
+                let items = subcategories[j].items;
+                for (let k = 0; k < items.length; k++) {
+                    if (items[k].todoId === todoId) {
+                        categories[i].subcategories[j].items.splice(k, 1);
+                        break breakWholeLoop;
+                    }
+                }
+            }
+        }
+        this.setState({
+            categories: categories
+        });
+        this.saveData();
     }
 
     handleChangeChk(e) {
@@ -73,17 +98,12 @@ class HomePage extends React.Component {
     }
 
     addNewSubcategoryBox() {
-        const lastSubcategoryId = this.state.lastSubcategoryId;
-        let categories = this.state.categories;
-        for (let i = 0; i < categories.length; i++) {
-            if (categories[i].isCurrentCategory) {
-                categories[i].subcategories.push({
-                    id: lastSubcategoryId + 1,
-                    title: "",
-                    items: [],
-                });
-            }
-        }
+        const { lastSubcategoryId, categories, activeCategoryIndex } = this.state;
+        categories[activeCategoryIndex].subcategories.push({
+            id: lastSubcategoryId + 1,
+            title: "",
+            items: [],
+        });
         this.setState({
             categories: categories,
             lastSubcategoryId: lastSubcategoryId + 1
@@ -155,7 +175,6 @@ class HomePage extends React.Component {
         const newCategory = {
             id: lastCategoryId + 1,
             title: inputValue + "",
-            isCurrentCategory: false,
             subcategories: []
         };
         let categories = this.state.categories;
@@ -168,9 +187,7 @@ class HomePage extends React.Component {
     }
 
     setCategoryTitle(categoryId, value) {
-
         let categories = this.state.categories;
-
         for (let i = 0; i < categories.length; i ++) {
             if (categories[i].id === categoryId) {
                 categories[i].title = value;
@@ -184,7 +201,6 @@ class HomePage extends React.Component {
 
     setSubcategoryTitle(subcategoryId, value) {
         let categories = this.state.categories;
-
         for (let i = 0; i < categories.length; i ++) {
             let subcategories = categories[i].subcategories;
             for (let j = 0; j < subcategories.length; j++) {
@@ -224,35 +240,27 @@ class HomePage extends React.Component {
             categories: categories,
             lastTodoId: latestId
         });
-        console.log(this.state.categories);
         this.saveData();
     }
 
     hangleOnClickCategory(categoryId) {
-        console.log(categoryId);
-        let latestCategoryId;
-        let categories = this.state.categories;
-        for (let i = 0; i < this.state.categories.length; i++) {
-            if (this.state.categories[i].id === categoryId) {
-                latestCategoryId = this.state.categories[i].id;
-                categories[i].isCurrentCategory = true;
-            } else {
-                categories[i].isCurrentCategory = false;
+        let { categories } = this.state;
+        let activeIndex = -1;
+        for (let i = 0; i < categories.length; i++) {
+            if (categories[i].id === categoryId) {
+                activeIndex = i;
+                break;
             }
         }
         this.setState({
             categories: categories,
-            activeCategoryId: latestCategoryId,
+            activeCategoryIndex: activeIndex,
+            activeCategory: categories[activeIndex]
         });
-        this.saveData();
     }
 
-    getActiveCategory() {
-        for (let i = 0; i < this.state.categories.length; i++) {
-            if (this.state.categories[i].id === this.state.activeCategoryId) {
-                return this.state.categories[i];
-            }
-        }
+    componentDidUpdate() {
+        this.saveData();
     }
 
     render() {
@@ -270,7 +278,7 @@ class HomePage extends React.Component {
                     hangleOnClickCategory={this.hangleOnClickCategory}
                     />
                 <Main
-                    category={this.getActiveCategory()}
+                    category={this.state.activeCategory}
                     handleChangeChk={this.handleChangeChk}
                     newSubcategory={this.newSubcategory}
                     deleteCategory={this.deleteCategory}
@@ -280,6 +288,7 @@ class HomePage extends React.Component {
                     setCategoryTitle={this.setCategoryTitle}
                     setSubcategoryTitle={this.setSubcategoryTitle}
                     addTodo={this.addTodo}
+                    deleteTodo={this.deleteTodo}
                 />
                 <Footer />
             </div>

@@ -3,11 +3,11 @@ export default function() {
         lastCategoryId: 2,
         lastSubcategoryId: 5,
         lastTodoId: 13,
+        activeCategoryIndex: 0,
         categories: [
             {
                 id: 1,
                 title: "Shopping",
-                isCurrentCategory: true,
                 subcategories: [
                     {
                         id: 1,
@@ -15,17 +15,17 @@ export default function() {
                         items: [
                             {
                                 todoId: 1,
-                                item: "shampoo",
+                                item: "1,shampoo",
                                 checked: false
                             },
                             {
                                 todoId: 2,
-                                item: "milk",
+                                item: "2,milk",
                                 checked: true
                             },
                             {
                                 todoId: 3,
-                                item: "bread",
+                                item: "3,bread",
                                 checked: false
                             }
                         ]
@@ -36,12 +36,12 @@ export default function() {
                         items: [
                             {
                                 todoId: 4,
-                                item: "shampoo",
+                                item: "4,shampoo",
                                 checked: false
                             },
                             {
                                 todoId: 5,
-                                item: "body soap",
+                                item: "5,body soap",
                                 checked: true
                             }
                         ]
@@ -52,22 +52,22 @@ export default function() {
                         items: [
                             {
                                 todoId: 6,
-                                item: "plastic box",
+                                item: "6,plastic box",
                                 checked: true
                             },
                             {
                                 todoId: 7,
-                                item: "pen case",
+                                item: "7,pen case",
                                 checked: false
                             },
                             {
                                 todoId: 8,
-                                item: "cushion",
+                                item: "8,cushion",
                                 checked: false
                             },
                             {
                                 todoId: 9,
-                                item: "pillow",
+                                item: "9,pillow",
                                 checked: true
                             }
                         ]
@@ -77,7 +77,6 @@ export default function() {
             {
                 id: 2,
                 title: "Gym",
-                isCurrentCategory: false,
                 subcategories: [
                     {
                         id: 4,
@@ -85,12 +84,12 @@ export default function() {
                         items: [
                             {
                                 todoId: 10,
-                                item: "chest",
+                                item: "10,chest",
                                 checked: true
                             },
                             {
                                 todoId: 11,
-                                item: "leg",
+                                item: "11,leg",
                                 checked: false
                             }
                         ]
@@ -101,12 +100,12 @@ export default function() {
                         items: [
                             {
                                 todoId: 12,
-                                item: "vegitable",
+                                item: "12,vegitable",
                                 checked: false
                             },
                             {
                                 todoId: 13,
-                                item: "100g protain",
+                                item: "13,100g protain",
                                 checked: true
                             }
                         ]

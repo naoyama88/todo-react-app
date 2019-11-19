@@ -9,21 +9,12 @@ class TransparentTodo extends React.Component {
             addNewTodo: false
         };
 
-        this.showInputForNewTodo = this.showInputForNewTodo.bind(this);
-        this.cancelAddTodo = this.cancelAddTodo.bind(this);
+        this.toggleAddTodo = this.toggleAddTodo.bind(this);
         this.newTodoRef = React.createRef();
     }
 
-    showInputForNewTodo() {
-        this.setState({
-            addNewTodo: true
-        });
-    }
-
-    cancelAddTodo() {
-        this.setState({
-            addNewTodo: false
-        });
+    toggleAddTodo(bool) {
+        this.setState({ addNewTodo: bool });
     }
 
     addNewTodoButtonClick() {
@@ -40,11 +31,19 @@ class TransparentTodo extends React.Component {
                 {(this.state.addNewTodo === true) ? (
                     <div className="add-todo-div">
                         <input ref={this.newTodoRef} id="addTodo" className="add-todo-input" />
-                        <button className="add-todo-button" onClick={() => this.addNewTodoButtonClick()}>add</button>
-                        <button className="cancel-add-todo-button" onClick={this.cancelAddTodo}>cancel</button>
+                        <button
+                            className="add-todo-button"
+                            onClick={() => this.addNewTodoButtonClick()}>
+                                add
+                        </button>
+                        <button
+                            className="cancel-add-todo-button"
+                            onClick={() => this.toggleAddTodo(false)}>
+                                cancel
+                        </button>
                     </div>
                 ) : (
-                    <div className="add-new-todo" onClick={this.showInputForNewTodo}></div>
+                    <div className="add-new-todo" onClick={() => this.toggleAddTodo(true)}></div>
                 )}
             </div>
         );

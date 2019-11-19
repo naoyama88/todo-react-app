@@ -14,10 +14,8 @@ class Subcategory extends React.Component {
         };
         this.titleInputRef = React.createRef();
 
-        this.clickOverlay = this.clickOverlay.bind(this);
         this.clickMenu = this.clickMenu.bind(this);
-        this.offMenu = this.offMenu.bind(this);
-        this.onMenu = this.onMenu.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
         this.deleteSubcategory = this.deleteSubcategory.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -26,7 +24,7 @@ class Subcategory extends React.Component {
 
     deleteSubcategory() {
         this.props.deleteSubcategory(this.props.subcategory.id);
-        this.offMenu();
+        this.toggleMenu(false);
     }
 
     clickMenu() {
@@ -34,13 +32,7 @@ class Subcategory extends React.Component {
             // avoid duplicate
             return;
         }
-
-        if (this.state.menuOn === false) {
-            this.onMenu();
-
-        } else {
-            this.offMenu();
-        }
+        this.toggleMenu(!this.state.menuOn);
     }
 
     componentDidUpdate() {
@@ -49,22 +41,11 @@ class Subcategory extends React.Component {
         }
     }
 
-    onMenu() {
+    toggleMenu(bool) {
         this.setState({
-            menuOn: true
+            menuOn: bool
         });
-        this.props.showMenu(true);
-    }
-
-    clickOverlay() {
-        this.offMenu();
-    }
-
-    offMenu() {
-        this.setState({
-            menuOn: false
-        });
-        this.props.showMenu(false);
+        this.props.showMenu(bool);
     }
 
     changeTitle() {
@@ -76,7 +57,7 @@ class Subcategory extends React.Component {
 
     onBlur(e) {
         this.props.setSubcategoryTitle(this.props.subcategory.id, e.target.value);
-        this.offMenu();
+        this.toggleMenu(false);
         this.setState({
             editSubcategoryTitle: false
         });
@@ -87,27 +68,6 @@ class Subcategory extends React.Component {
     }
 
     render() {
-        let subcategory = [];
-        let i;
-        for (i in this.props.subcategory.items) {
-            subcategory.push(
-                <Todo
-                    key={i}
-                    item={this.props.subcategory.items[i].item}
-                    todoId={this.props.subcategory.items[i].todoId}
-                    handleChangeChk={this.props.handleChangeChk}
-                    checked={this.props.subcategory.items[i].checked}
-                />
-            );
-        }
-        subcategory.push(
-            <TransparentTodo
-                key={i + 1}
-                handleChangeChk={this.props.handleChangeChk}
-                addTodo={this.addTodo}
-            />
-        );
-
         return (
             <div className="subcategory">
                 {this.state.editSubcategoryTitle ? (
@@ -122,11 +82,29 @@ class Subcategory extends React.Component {
                 ) : (
                     <div>{this.props.subcategory.title}</div>
                 )}
-                {subcategory}
+                {this.props.subcategory.items.map((item) => {
+                    return (
+                        <Todo
+                            key={item.todoId}
+                            item={item.item}
+                            todoId={item.todoId}
+                            handleChangeChk={this.props.handleChangeChk}
+                            checked={item.checked}
+                            showMenu={this.props.showMenu}
+                            menuOn={this.props.menuOn}
+                            deleteTodo={this.props.deleteTodo}
+                            />
+                    )
+                })}
+                <TransparentTodo
+                    key={9999}
+                    handleChangeChk={this.props.handleChangeChk}
+                    addTodo={this.addTodo}
+                    />
                 <div className="dots" onClick={this.clickMenu}>⋮</div>
                 {this.props.menuOn === true && this.state.menuOn === true &&
                     <div className="menu__modal">
-                        <Overlay onClick={this.clickOverlay} />
+                        <Overlay onClick={() => this.toggleMenu(false)} />
                         <div className="menu">
                             <ul>
                                 <li onClick={this.changeTitle}>change title</li>

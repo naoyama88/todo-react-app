@@ -14,10 +14,8 @@ class Main extends React.Component {
         };
         this.titleInputRef = React.createRef();
 
-        this.clickOverlay = this.clickOverlay.bind(this);
         this.clickMenu = this.clickMenu.bind(this);
-        this.offMenu = this.offMenu.bind(this);
-        this.onMenu = this.onMenu.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -25,7 +23,7 @@ class Main extends React.Component {
 
     deleteCategory() {
         this.props.deleteCategory(this.props.category.id);
-        this.offMenu();
+        this.toggleMenu(false);
     }
 
     changeTitle() {
@@ -46,36 +44,17 @@ class Main extends React.Component {
             // avoid duplicate
             return;
         }
-
-        if (this.state.menuOn === false) {
-            this.onMenu();
-
-        } else {
-            this.offMenu();
-        }
+        this.toggleMenu(!this.state.menuOn);
     }
 
-    onMenu() {
-        this.setState({
-            menuOn: true
-        });
-        this.props.showMenu(true);
-    }
-
-    clickOverlay() {
-        this.offMenu();
-    }
-
-    offMenu() {
-        this.setState({
-            menuOn: false
-        });
-        this.props.showMenu(false);
+    toggleMenu(bool) {
+        this.setState({ menuOn: bool });
+        this.props.showMenu(bool);
     }
 
     onBlur(e) {
         this.props.setCategoryTitle(this.props.category.id, e.target.value);
-        this.offMenu();
+        this.toggleMenu(false);
         this.setState({
             editCategoryTitle: false
         });
@@ -111,6 +90,7 @@ class Main extends React.Component {
                                     deleteSubcategory={this.props.deleteSubcategory}
                                     setSubcategoryTitle={this.props.setSubcategoryTitle}
                                     addTodo={this.props.addTodo}
+                                    deleteTodo={this.props.deleteTodo}
                                     />
                             )
                         })}
@@ -121,7 +101,7 @@ class Main extends React.Component {
                     <div className="main__menu" onClick={this.clickMenu}>•••</div>
                     {this.props.menuOn === true && this.state.menuOn === true &&
                         <div className="menu__modal">
-                            <Overlay onClick={this.clickOverlay} />
+                            <Overlay onClick={() => this.toggleMenu(false)} />
                             <div className="menu">
                                 <ul>
                                     <li onClick={this.changeTitle}>change title</li>

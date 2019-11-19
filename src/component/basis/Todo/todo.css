@@ -44,6 +44,21 @@
     user-select: none;
 }
 
+.todo .todo__menu {
+    position: absolute;
+    display: none;
+    margin-left: auto;
+    margin-right: 6px;
+    top: 0;
+    right: 0;
+    padding: 0 3px;
+    background-color: var(--base-background-color);
+}
+
+.todo:hover .todo__menu {
+    display: block;
+}
+
 .todo--transparent .add-new-todo {
     width: 18px;
     height: 18px;
