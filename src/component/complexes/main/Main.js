@@ -89,6 +89,7 @@ class Main extends React.Component {
                                     menuOn={this.props.menuOn}
                                     deleteSubcategory={this.props.deleteSubcategory}
                                     setSubcategoryTitle={this.props.setSubcategoryTitle}
+                                    setTodoTitle={this.props.setTodoTitle}
                                     addTodo={this.props.addTodo}
                                     deleteTodo={this.props.deleteTodo}
                                     />

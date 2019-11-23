@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.todo input {
+.todo input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     height: 0;
@@ -16,7 +16,7 @@
     cursor: pointer;
 }
 
-.todo input:checked + span:before {
+.todo input[type="checkbox"]:checked + span:before {
     content: ' \2713\0020';
     color: white;
     display: block;
@@ -92,4 +92,15 @@
 .todo--transparent .add-todo-button,
 .todo--transparent .cancel-add-todo-button {
     cursor: pointer;
+}
+
+.todo__title--edit {
+    font-size: 1.3rem;
+    width: 90%;
+    margin-top: -10px;
+    margin-left: -2px;
+}
+
+.todo__title--edit:focus{
+    outline: none;
 }

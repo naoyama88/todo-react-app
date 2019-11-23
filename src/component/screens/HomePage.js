@@ -31,6 +31,7 @@ class HomePage extends React.Component {
         this.showMenu = this.showMenu.bind(this);
         this.setCategoryTitle = this.setCategoryTitle.bind(this);
         this.setSubcategoryTitle = this.setSubcategoryTitle.bind(this);
+        this.setTodoTitle = this.setTodoTitle.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this.hangleOnClickCategory = this.hangleOnClickCategory.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
@@ -67,7 +68,6 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories
         });
-        this.saveData();
     }
 
     handleChangeChk(e) {
@@ -89,12 +89,10 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories
         });
-        this.saveData();
     }
 
     newSubcategory() {
         this.addNewSubcategoryBox();
-        this.saveData();
     }
 
     addNewSubcategoryBox() {
@@ -108,7 +106,6 @@ class HomePage extends React.Component {
             categories: categories,
             lastSubcategoryId: lastSubcategoryId + 1
         });
-        this.saveData();
     }
 
     saveData() {
@@ -145,7 +142,6 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories
         });
-        this.saveData();
     }
 
     deleteSubcategory(subcategoryId) {
@@ -165,7 +161,6 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories
         });
-        this.saveData();
     }
 
     addNewCategory(value) {
@@ -183,7 +178,6 @@ class HomePage extends React.Component {
             categories: categories,
             newCategoryTitle: null
         });
-        this.saveData();
     }
 
     setCategoryTitle(categoryId, value) {
@@ -196,23 +190,44 @@ class HomePage extends React.Component {
         this.setState({
             categories: categories
         });
-        this.saveData();
     }
 
     setSubcategoryTitle(subcategoryId, value) {
         let categories = this.state.categories;
+        breakWholeLoop:
         for (let i = 0; i < categories.length; i ++) {
             let subcategories = categories[i].subcategories;
             for (let j = 0; j < subcategories.length; j++) {
                 if (subcategories[j].id === subcategoryId) {
                     categories[i].subcategories[j].title = value;
+                    break breakWholeLoop;
                 }
             }
         }
         this.setState({
             categories: categories
         });
-        this.saveData();
+    }
+
+    setTodoTitle(todoId, value) {
+        let { categories } = this.state;
+        breakWholeLoop:
+        for (let i = 0; i < categories.length; i ++) {
+            const { subcategories } = categories[i];
+            for (let j = 0; j < subcategories.length; j++) {
+                const { items } = subcategories[j];
+                for (let k = 0; k < items.length; k++) {
+                    if (items[k].todoId === todoId) {
+                        categories[i].subcategories[j].items[k].item = value;
+                        break breakWholeLoop;
+                    }
+                }
+            }
+        }
+
+        this.setState({
+            categories: categories
+        });
     }
 
     addTodo(value, subcategoryId) {
@@ -240,7 +255,6 @@ class HomePage extends React.Component {
             categories: categories,
             lastTodoId: latestId
         });
-        this.saveData();
     }
 
     hangleOnClickCategory(categoryId) {
@@ -287,6 +301,7 @@ class HomePage extends React.Component {
                     menuOn={this.state.menuOn}
                     setCategoryTitle={this.setCategoryTitle}
                     setSubcategoryTitle={this.setSubcategoryTitle}
+                    setTodoTitle={this.setTodoTitle}
                     addTodo={this.addTodo}
                     deleteTodo={this.deleteTodo}
                 />

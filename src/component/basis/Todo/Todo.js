@@ -11,12 +11,14 @@ class Todo extends React.Component {
             checked: props.checked,
             item: props.item,
             menuOn: false,
+            editTodoTitle: false,
         };
 
         this.clickMenu = this.clickMenu.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     clickMenu() {
@@ -35,13 +37,21 @@ class Todo extends React.Component {
     changeTitle() {
         this.setState({
             menuOn: false,
-            editSubcategoryTitle: true
+            editTodoTitle: true
         });
     }
 
     deleteTodo() {
         this.props.deleteTodo(this.props.todoId);
         this.toggleMenu(false);
+    }
+
+    onBlur(e) {
+        this.props.setTodoTitle(this.props.todoId, e.target.value);
+        this.toggleMenu(false);
+        this.setState({
+            editTodoTitle: false
+        });
     }
 
     render() {
@@ -55,7 +65,19 @@ class Todo extends React.Component {
                         onChange={this.props.handleChangeChk}>
                     </input>
                     <span className="checkbox"></span>
-                    <span className="input">{this.state.item}</span>
+                    {this.state.editTodoTitle ? (
+                        <span>
+                            <input
+                                className="todo__title--edit"
+                                defaultValue={this.state.item}
+                                ref={(ref) => this.titleInputRef = ref }
+                                onBlur={this.onBlur}
+                                />
+                        </span>
+                    ) : (
+                        <span className="input">{this.state.item}</span>
+                    )}
+
                 </label>
                 <div className="todo__menu" onClick={this.clickMenu}>•••</div>
                 {this.props.menuOn === true && this.state.menuOn === true &&
